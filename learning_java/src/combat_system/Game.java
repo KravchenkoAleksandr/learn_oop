@@ -9,7 +9,7 @@ public class Game {
         this.enemy = enemy;
     }
 
-    void startBattle() {
+    public void startBattle() {
 
         while (player.getHp() > 0 && enemy.getHp() > 0) {
             player.attack(enemy);

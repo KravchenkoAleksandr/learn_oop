@@ -2,9 +2,9 @@ package combat_system;
 
 public abstract class AbstractCharacter {
 
-    private int damage;
+    private final int damage;
     private int hp;
-    private String name;
+    private final String name;
 
     public AbstractCharacter(int damage, int hp, String name) {
         this.damage = damage;
@@ -28,7 +28,7 @@ public abstract class AbstractCharacter {
         target.takeDamage(this.damage);
     }
 
-    public void takeDamage(int damage) {
+    protected void takeDamage(int damage) {
         hp -= damage;
     }
 
