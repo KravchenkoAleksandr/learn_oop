@@ -32,24 +32,13 @@ public class Player {
         this.inventory = inventory;
     }
 
-    public boolean isBuy(String answer) {
-        return answer.equalsIgnoreCase("да");
-    }
-
-    public void pickupItem(Item item) {
-        checkItem(item);
-        inventory.getItems().add(item);
-    }
-
-    private void checkItem(Item item) {
-        if (inventory.getItems().contains(item)) {
-            System.out.println("У вас есть данный предмет");
-        }
+    public void reduceGold(int price) {
+        gold -= price;
     }
 
     public void useItem(String name) {
         Item item = UtilClass.getItem(inventory.getItems(), name);
-        System.out.println("Использую " + item.getName());
+        System.out.println("Наношу урон " + item.getDamage());
     }
 
 }

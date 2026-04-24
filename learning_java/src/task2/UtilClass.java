@@ -3,12 +3,13 @@ package task2;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.Set;
 
 public class UtilClass {
 
-    private static Scanner sc = new Scanner(System.in);
+    private static final Scanner sc = new Scanner(System.in);
 
-    public static Item getItem(List<Item> items, String name) {
+    public static Item getItem(Set<Item> items, String name) {
         for (Item item : items) {
             if (item.getName().equals(name)) {
                 return item;
@@ -21,10 +22,10 @@ public class UtilClass {
         return sc.nextLine();
     }
 
-    public static void printListItems(List<Item> items) {
+    public static void printListItems(Set<Item> items) {
         for (Item item : items) {
             int count = 1;
-            System.out.println(count + "." + item.getName());
+            System.out.println(count++ + "." + item.getName());
         }
     }
 }
