@@ -11,10 +11,6 @@ public class Store {
         this.listIvailableItems = new HashSet<>();
     }
 
-    public Set<Item> getListIvailableItems() {
-        return listIvailableItems;
-    }
-
     public void addItem(Item item) {
         listIvailableItems.add(item);
     }

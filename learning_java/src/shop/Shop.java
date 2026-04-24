@@ -14,5 +14,14 @@ public class Shop {
         }
     }
 
+    public Product findProduct(String name) {
+        for (Product product : productsShop) {
+            if (product.getName().equals(name)) {
+                return product;
+            }
+        }
+        throw new RuntimeException("Продукт не найден");
+    }
+
 
 }

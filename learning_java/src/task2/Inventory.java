@@ -10,10 +10,6 @@ public class Inventory {
         this.items = new HashSet<>();
     }
 
-    public Set<Item> getItems() {
-        return items;
-    }
-
     public void pickupItem(Item item) {
         if (checkItem(item.getName())) {
             return;

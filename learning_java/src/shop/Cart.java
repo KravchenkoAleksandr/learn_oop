@@ -14,31 +14,20 @@ public class Cart {
         this.summary = summary;
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
+
     public int getSummary() {
         return summary;
     }
 
-    public void addProduct(String name) {
-        Product product = findProduct(name);
+    public void addProduct(Product product) {
         products.add(product);
     }
 
     public void deleteProduct(String name) {
-        Product product = findProduct(name);
-        products.remove(product);
-    }
-
-    private Product findProduct(String name) {
-        for (Product product : products) {
-            if (product.getName().equals(name)) {
-                return product;
-            }
-        }
-        throw new RuntimeException("Продукт не найден");
-    }
-
-    public void addProductsInCartUser(List<Product> userCart) {
-        userCart.addAll(products);
+        products.removeIf(product -> product.getName().equals(name));
     }
 
     public void calcSummary() {

@@ -13,12 +13,12 @@ public class User {
         this.money = money;
     }
 
-    public List<Product> getProductListUser() {
-        return productListUser;
-    }
-
     public int getMoney() {
         return money;
+    }
+
+    public void addProductsInCartUser(List<Product> cart) {
+        productListUser.addAll(cart);
     }
 
     public void buy(int summary) {

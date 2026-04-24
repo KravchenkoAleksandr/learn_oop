@@ -1,5 +1,7 @@
 package shop;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Order {
@@ -21,10 +23,10 @@ public class Order {
             shop.printProducts();
 
             inputUser = sc.nextLine();
-            cart.addProduct(inputUser);
+            cart.addProduct(shop.findProduct(inputUser));
             cart.calcSummary();
 
-        } while (inputUser.equals("exit")); // в учебных целях выход = 6
+        } while (!inputUser.equals("exit")); // в учебных целях выход = 6
     }
 
     public void buyOrder() {
@@ -32,7 +34,7 @@ public class Order {
             throw new IllegalArgumentException("Недостаточно средств");
         }
         user.buy(cart.getSummary());
-        cart.addProductsInCartUser(user.getProductListUser());
+        user.addProductsInCartUser(cart.getProducts());
         cart.clearCart();
     }
 
@@ -41,6 +43,7 @@ public class Order {
         //пользователь вводит в консоль название товара
         String input = "";
         cart.deleteProduct(input);
+        cart.calcSummary();
     }
 
 }
