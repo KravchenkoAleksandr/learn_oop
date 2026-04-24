@@ -1,0 +1,46 @@
+package shop;
+
+import java.util.Scanner;
+
+public class Order {
+
+    private final Shop shop;
+    private Cart cart;
+    private User user;
+
+    public Order(Shop shop, Cart cart, User user) {
+        this.shop = shop;
+        this.cart = cart;
+        this.user = user;
+    }
+
+    public void createOrder(Scanner sc) {
+        String inputUser;
+        do {
+            System.out.println("Выберете продукты номер продукта");
+            shop.printProducts();
+
+            inputUser = sc.nextLine();
+            cart.addProduct(inputUser);
+            cart.calcSummary();
+
+        } while (inputUser.equals("exit")); // в учебных целях выход = 6
+    }
+
+    public void buyOrder() {
+        if (user.getMoney() < cart.getSummary()) {
+            throw new IllegalArgumentException("Недостаточно средств");
+        }
+        user.buy(cart.getSummary());
+        cart.addProductsInCartUser(user.getProductListUser());
+        cart.clearCart();
+    }
+
+    public void deleteProductFromCart() {
+        //в учебных целях удаляю по одному товару
+        //пользователь вводит в консоль название товара
+        String input = "";
+        cart.deleteProduct(input);
+    }
+
+}
