@@ -5,17 +5,16 @@ import java.util.List;
 
 public class Cart {
 
-    private List<Product> products;
+    private final List<Product> products;
     private int summary;
 
 
-    public Cart(int summary) {
+    public Cart() {
         products = new ArrayList<>();
-        this.summary = summary;
     }
 
     public List<Product> getProducts() {
-        return products;
+        return new ArrayList<>(products);
     }
 
     public int getSummary() {
@@ -31,6 +30,7 @@ public class Cart {
     }
 
     public void calcSummary() {
+        summary = 0;
         for (Product pr : products) {
             summary += pr.getPrice();
         }

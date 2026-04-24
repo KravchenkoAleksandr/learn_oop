@@ -38,10 +38,11 @@ public class Order {
         cart.clearCart();
     }
 
-    public void deleteProductFromCart() {
+    public void deleteProductFromCart(Scanner sc) {
         //в учебных целях удаляю по одному товару
         //пользователь вводит в консоль название товара
         String input = "";
+        input = sc.nextLine();
         cart.deleteProduct(input);
         cart.calcSummary();
     }

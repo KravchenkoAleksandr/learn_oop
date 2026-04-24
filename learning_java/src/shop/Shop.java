@@ -6,6 +6,10 @@ public class Shop {
 
     private List<Product> productsShop;
 
+    public Shop(List<Product> productsShop) {
+        this.productsShop = productsShop;
+    }
+
     public void printProducts() {
         int count = 0;
         for (Product product : productsShop) {
@@ -22,6 +26,4 @@ public class Shop {
         }
         throw new RuntimeException("Продукт не найден");
     }
-
-
 }
