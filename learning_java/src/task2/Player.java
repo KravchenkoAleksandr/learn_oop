@@ -37,7 +37,7 @@ public class Player {
     }
 
     public void useItem(String name) {
-        Item item = UtilClass.getItem(inventory.getItems(), name);
+        Item item = inventory.getItem(name);
         System.out.println("Наношу урон " + item.getDamage());
     }
 

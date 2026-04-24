@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Inventory {
-    private Set<Item> items;
+    private final Set<Item> items;
 
     public Inventory() {
         this.items = new HashSet<>();
@@ -19,6 +19,10 @@ public class Inventory {
             return;
         }
         items.add(item);
+    }
+
+    public Item getItem(String name) {
+        return UtilClass.getItem(items, name);
     }
 
     private boolean checkItem(String nameItem) {

@@ -23,8 +23,8 @@ public class UtilClass {
     }
 
     public static void printListItems(Set<Item> items) {
+        int count = 1;
         for (Item item : items) {
-            int count = 1;
             System.out.println(count++ + "." + item.getName());
         }
     }

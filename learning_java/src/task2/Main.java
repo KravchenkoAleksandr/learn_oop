@@ -6,7 +6,7 @@ public class Main {
         Inventory inventory = new Inventory();
         Player player = new Player("king", 150, inventory);
 
-        StoreItems storeItem = new StoreItems();
+        Store storeItem = new Store();
         storeItem.addItem(sword);
 
         Game game = new Game(player, storeItem);

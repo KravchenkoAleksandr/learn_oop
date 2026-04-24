@@ -3,11 +3,11 @@ package task2;
 import java.util.HashSet;
 import java.util.Set;
 
-public class StoreItems {
+public class Store {
 
-    private Set<Item> listIvailableItems;
+    private final Set<Item> listIvailableItems;
 
-    public StoreItems() {
+    public Store() {
         this.listIvailableItems = new HashSet<>();
     }
 

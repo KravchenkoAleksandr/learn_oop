@@ -1,10 +1,10 @@
 package task2;
 
 public class Game {
-    private final StoreItems storeItem;
+    private final Store storeItem;
     private final Player player;
 
-    public Game(Player player, StoreItems storeItem) {
+    public Game(Player player, Store storeItem) {
         this.player = player;
         this.storeItem = storeItem;
     }
