@@ -8,8 +8,7 @@ public class User {
     private List<Product> productListUser = new ArrayList<>();
     private int money;
 
-    public User(List<Product> productListUser, int money) {
-        this.productListUser = productListUser;
+    public User(int money) {
         this.money = money;
     }
 
@@ -17,7 +16,7 @@ public class User {
         return money;
     }
 
-    public void addProductsInCartUser(List<Product> cart) {
+    public void addPurchasedProducts(List<Product> cart) {
         productListUser.addAll(cart);
     }
 

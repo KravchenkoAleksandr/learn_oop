@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Shop {
 
-    private List<Product> productsShop;
+    private final List<Product> productsShop;
 
     public Shop(List<Product> productsShop) {
         this.productsShop = productsShop;

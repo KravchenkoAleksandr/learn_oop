@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Order {
 
     private final Shop shop;
-    private Cart cart;
-    private User user;
+    private final Cart cart;
+    private final User user;
 
     public Order(Shop shop, Cart cart, User user) {
         this.shop = shop;
@@ -17,7 +17,7 @@ public class Order {
     public void createOrder(Scanner sc) {
         String inputUser;
         while (true) {
-            System.out.println("Выберете продукты номер продукта");
+            System.out.println("Введите название продукта или exit");
             shop.printProducts();
 
             inputUser = sc.nextLine();
@@ -34,7 +34,7 @@ public class Order {
             throw new IllegalArgumentException("Недостаточно средств");
         }
         user.buy(cart.getSummary());
-        user.addProductsInCartUser(cart.getProducts());
+        user.addPurchasedProducts(cart.getProducts());
         cart.clearCart();
     }
 
