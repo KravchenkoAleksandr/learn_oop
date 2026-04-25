@@ -16,17 +16,44 @@ public class Order {
 
     public void createOrder(Scanner sc) {
         String inputUser;
+        String quantity;
         while (true) {
-            System.out.println("Введите название продукта или exit");
             shop.printProducts();
-
-            inputUser = sc.nextLine();
+            System.out.println("Введите название продукта или exit");
+            inputUser = sc.nextLine().trim();
 
             if ("exit".equals(inputUser)) break;
 
-            cart.addProduct(shop.findProduct(inputUser));
+            CartItem product = shop.findProduct(inputUser);
+
+            System.out.println("Продукт:" + product.getProduct().getName() +
+                    "|| оставшееся количество: " + product.getQuantity());
+            System.out.println("Введите количество продукта");
+
+            quantity = sc.nextLine().trim();
+
+            int count = Integer.parseInt(quantity);
+
+            if (!shop.isAvailable(product, count)) {
+                System.out.println("Товара:" + product.getProduct().getName() +
+                        " осталось " + product.getQuantity());
+            }
+
+            product.setQuantity(0);//обнуляем для добавления нужного количества
+
+            cart.addProduct(product, count);
             cart.calcSummary();
+
+            shop.deleteProductFromShop(product, count);
         }
+    }
+
+
+    public void deleteProductFromOrder(CartItem product, int value) {
+        cart.deleteProduct(product, value);
+        cart.calcSummary();
+
+        shop.addProductFromCart(product, value);
     }
 
     public void buyOrder() {
@@ -34,16 +61,8 @@ public class Order {
             throw new IllegalArgumentException("Недостаточно средств");
         }
         user.buy(cart.getSummary());
-        user.addPurchasedProducts(cart.getProducts());
-        cart.clearCart();
-    }
+        user.addPurchasedProducts(cart.getProductsUser());
 
-    public void deleteProductFromCart(Scanner sc) {
-        //в учебных целях удаляю по одному товару
-        //пользователь вводит в консоль название товара
-        String input = "";
-        input = sc.nextLine();
-        cart.deleteProduct(input);
-        cart.calcSummary();
+        cart.clearCart();
     }
 }

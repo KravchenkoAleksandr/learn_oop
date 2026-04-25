@@ -1,27 +1,48 @@
 package shop;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Shop {
 
-    private final List<Product> productsShop;
+    private final List<CartItem> productsShop = new ArrayList<>();
 
-    public Shop(List<Product> productsShop) {
-        this.productsShop = productsShop;
+    public Shop() {
     }
 
     public void printProducts() {
-        for (Product product : productsShop) {
-            System.out.println(product.getName());
+        for (CartItem product : productsShop) {
+            System.out.println(product.getProduct().getName());
         }
     }
 
-    public Product findProduct(String name) {
-        for (Product product : productsShop) {
-            if (product.getName().equals(name)) {
-                return product;
+    public CartItem findProduct(String name) {
+        for (CartItem product : productsShop) {
+            if (product.getProduct().getName().equals(name)) {
+                return new CartItem(product.getProduct(), product.getQuantity());
             }
         }
-        throw new RuntimeException("Продукт не найден");
+        throw new RuntimeException("Продукт не найден"); // нужно ловить
+    }
+
+
+    public boolean isAvailable(CartItem product, int need) {
+        return product.getQuantity() >= need;
+    }
+
+    public void addProductToShop(CartItem product) {
+        productsShop.add(product);
+    }
+
+    public void addProductFromCart(CartItem product, int value) {
+        product.addQuantity(value);
+    }
+
+    public void deleteProductFromShop(CartItem product, int quantity) {
+        if (product.getQuantity() == 1) {
+            productsShop.remove(product);
+        } else {
+            product.deleteQuantity(quantity);
+        }
     }
 }

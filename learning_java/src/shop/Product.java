@@ -4,6 +4,11 @@ public class Product {
     private final String name;
     private int price;
 
+    public Product(String name, int price) {
+        this.name = name;
+        this.price = price;
+    }
+
     public String getName() {
         return name;
     }
@@ -15,9 +20,5 @@ public class Product {
     public void setPrice(int price) {
         this.price = price;
     }
-
-    public Product(int price, String name) {
-        this.price = price;
-        this.name = name;
-    }
 }
+
