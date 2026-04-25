@@ -1,7 +1,5 @@
 package shop;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Order {
@@ -18,15 +16,17 @@ public class Order {
 
     public void createOrder(Scanner sc) {
         String inputUser;
-        do {
+        while (true) {
             System.out.println("Выберете продукты номер продукта");
             shop.printProducts();
 
             inputUser = sc.nextLine();
+
+            if ("exit".equals(inputUser)) break;
+
             cart.addProduct(shop.findProduct(inputUser));
             cart.calcSummary();
-
-        } while (!inputUser.equals("exit")); // в учебных целях выход = 6
+        }
     }
 
     public void buyOrder() {
@@ -46,5 +46,4 @@ public class Order {
         cart.deleteProduct(input);
         cart.calcSummary();
     }
-
 }

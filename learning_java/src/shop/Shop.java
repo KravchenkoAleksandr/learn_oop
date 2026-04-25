@@ -11,10 +11,8 @@ public class Shop {
     }
 
     public void printProducts() {
-        int count = 0;
         for (Product product : productsShop) {
-            System.out.println(count + "." + product.getName());
-            count++;
+            System.out.println(product.getName());
         }
     }
 
