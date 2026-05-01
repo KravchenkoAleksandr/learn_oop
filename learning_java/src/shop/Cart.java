@@ -3,10 +3,10 @@ package shop;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cart {
+public class Cart implements Entity {
 
     private final List<CartItem> productsUser;
-    private int summary;
+    private int total;
 
 
     public Cart() {
@@ -17,35 +17,80 @@ public class Cart {
         return new ArrayList<>(productsUser);
     }
 
-    public int getSummary() {
-        return summary;
+    public int getTotal() {
+        return total;
     }
 
-    public void addProduct(CartItem product, int quantity) {
-        productsUser.add(product);
-        product.addQuantity(quantity);
-    }
-
-    public void deleteProduct(CartItem product, int quantity) {
-        if (product.getQuantity() < quantity) {
-            throw new RuntimeException("Вы хотите удалить количество продукта больше ,чем в корзине");
+    public void printProductsInCart() {
+        System.out.println("Содержимое корзины:");
+        for (CartItem product : productsUser) {
+            System.out.println("Продукта: " + product.getProduct().getName() +
+                    " Количество: " + product.getQuantity());
         }
-        if (product.getQuantity() == 1) {
-            productsUser.remove(product);
+        System.out.println("Цена: " + total);
+    }
+
+    public void addProduct(Product product, int quantity) {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Нельзя добавить ноль продуктов");
+        }
+        CartItem cartItem = findProduct(product.getName());
+        if (cartItem != null) {
+            cartItem.addQuantity(quantity);
         } else {
-            product.deleteQuantity(quantity);
+            productsUser.add(new CartItem(product, quantity));
         }
+    }
+
+
+    public void deleteProduct(String name, int quantity) {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Нельзя удалить ноль продуктов");
+        }
+
+        CartItem cartItem = findProduct(name);
+
+        if (cartItem == null) return;
+
+        if (quantity > cartItem.getQuantity()) {
+            throw new IllegalArgumentException("Нельзя удалить больше,чем есть в корзине");
+        }
+
+        if (cartItem.getQuantity() == quantity) {
+            productsUser.remove(cartItem);
+        } else {
+            cartItem.deleteQuantity(quantity);
+        }
+    }
+
+    public boolean isAvailable(int remains, int need) {
+        return remains >= need;
+    }
+
+    @Override
+    public int getRemains(Product product) {
+        CartItem cartItem = findProduct(product.getName());
+        return cartItem != null ? cartItem.getQuantity() : 0;
+    }
+
+    public CartItem findProduct(String name) {
+        for (CartItem cartItem : productsUser) {
+            if (cartItem.getProduct().getName().equalsIgnoreCase(name)) {
+                return cartItem;
+            }
+        }
+        return null;
     }
 
     public void calcSummary() {
-        summary = 0;
+        total = 0;
         for (CartItem pr : productsUser) {
-            summary += pr.getProduct().getPrice();
+            total += pr.getProduct().getPrice() * pr.getQuantity();
         }
     }
 
     public void clearCart() {
         productsUser.clear();
-        summary = 0;
+        total = 0;
     }
 }

@@ -13,10 +13,6 @@ public class CartItem {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public Product getProduct() {
         return product;
     }
@@ -27,5 +23,18 @@ public class CartItem {
 
     public void deleteQuantity(int value) {
         quantity -= value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CartItem cartItem = (CartItem) o;
+        return product.equals(cartItem.product);
+    }
+
+    @Override
+    public int hashCode() {
+        return product.hashCode();
     }
 }

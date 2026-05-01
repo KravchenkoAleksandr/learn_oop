@@ -17,8 +17,19 @@ public class Product {
         return price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Product product = (Product) o;
+        return price == product.price && name.equals(product.name);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + price;
+        return result;
     }
 }
 
